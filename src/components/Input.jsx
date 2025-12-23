@@ -1,7 +1,7 @@
 import React from 'react'
 import { useId } from 'react'
 
-function Input({ lable, type = "text", className = '', ...props }) {
+const Input = React.forwardRef(function Input({ lable, type = "text", className = '', ...props }) {
     const id = useId()
 
     return (
@@ -17,6 +17,6 @@ function Input({ lable, type = "text", className = '', ...props }) {
             />
         </div>
     )
-}
+})
 
 export default Input

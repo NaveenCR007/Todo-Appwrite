@@ -1,5 +1,3 @@
-import React from 'react'
-
 function Button({ children, bgColor = 'bg-blue-400', type = 'button', textColor = 'text-white', className = '', ...props }) {
 
     return (
