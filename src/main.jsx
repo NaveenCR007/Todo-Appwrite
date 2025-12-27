@@ -4,24 +4,23 @@ import { store } from './store/store.js'
 import './index.css'
 import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider } from 'react-router-dom'
 import App from './App.jsx'
-import AuthLayout from './components/AuthLayout.jsx'
-import AddTask from './components/AddTask.jsx'
-import Login from './components/Login.jsx'
-import Signup from './components/Signup.jsx'
+import { Login, Signup, AddTask, AuthLayout } from './components/index.js'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path='/' element={<App />}>
 
-      {/* Only users can add tasks */}
-      <AuthLayout authentication>
-        <Route path='/add' element={<AddTask />} />
-      </AuthLayout>
+      {/* Protected routes */}
+      <Route element={<AuthLayout authentication />}>
+        <Route path="add" element={<AddTask />} />
+      </Route>
 
-      <AuthLayout authentication={false}>
-        <Route path='/login' element={<Login />} />
-        <Route path='/signup' element={<Signup />} />
-      </AuthLayout>
+      {/* Public routes */}
+      <Route element={<AuthLayout authentication={false} />}>
+        <Route path="login" element={<Login />} />
+        <Route path="signup" element={<Signup />} />
+      </Route>
+
     </Route>
   )
 )
