@@ -40,11 +40,11 @@ function Header() {
                 <ul className='flex ml-auto'>
                     {navItems.map((item, idx) =>
                         item.active ? (
-                            <li key={idx}
-                                className='inline-block px-5 py-2 duration-200 hover:bg-blue-300 rounded-full cursor-pointer'>
-                                <button onClick={navigate(item.path)}>
-                                    {item.name}
-                                </button>
+                            <li
+                                key={idx}
+                                className='inline-block px-5 py-2 duration-200 hover:bg-blue-300 rounded-full cursor-pointer'
+                                onClick={() => navigate(item.path)}>
+                                {item.name}
                             </li>
                         ) : null
                     )}

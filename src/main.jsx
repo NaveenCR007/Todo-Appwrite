@@ -4,11 +4,13 @@ import { store } from './store/store.js'
 import './index.css'
 import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider } from 'react-router-dom'
 import App from './App.jsx'
-import { Login, Signup, AddTask, AuthLayout } from './components/index.js'
+import { Login, Signup, AddTask, AuthLayout, Home } from './components/index.js'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path='/' element={<App />}>
+
+      <Route path='/' element={<Home />} />
 
       {/* Protected routes */}
       <Route element={<AuthLayout authentication />}>

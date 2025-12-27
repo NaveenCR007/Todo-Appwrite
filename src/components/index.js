@@ -8,6 +8,8 @@ import Button from './Button'
 import AuthLayout from './AuthLayout'
 import Tasks from './Tasks'
 import AddTask from './AddTask'
+import Home from './Home'
+import Logo from './Logo'
 
 export {
     Header,
@@ -19,5 +21,7 @@ export {
     Button,
     AuthLayout,
     Tasks,
-    AddTask
+    AddTask,
+    Home,
+    Logo
 }
