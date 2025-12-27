@@ -1,4 +1,4 @@
-import { Databases, Client, ID } from "appwrite";
+import { Databases, Client, ID, Query } from "appwrite";
 import conf from '../conf/config'
 
 class Storage {
@@ -48,6 +48,21 @@ class Storage {
             console.log("Task updated");
             return result;
 
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+
+    async listTasks(id) {
+        try {
+            const tasks = this.databases.listDocuments({
+                databaseId: conf.appWriteDatabaseId,
+                collectionId: conf.appWriteCollectionId,
+                queries: [tasks.id === id]
+            })
+
+            return tasks
         } catch (error) {
             console.log(error);
         }

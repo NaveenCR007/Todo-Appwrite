@@ -15,8 +15,14 @@ function Header() {
         },
 
         {
-            name: "About",
-            path: '/about',
+            name: "Add Task",
+            path: '/',
+            active: authStatus
+        },
+
+        {
+            name: "Signup",
+            path: '/signup',
             active: true
         },
 

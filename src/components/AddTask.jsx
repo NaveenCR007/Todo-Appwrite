@@ -3,23 +3,26 @@ import Input from './Input'
 import Button from './Button'
 import { useForm } from 'react-hook-form'
 import storageService from '../appwrite/config'
+import { useSelector } from 'react-redux'
+import Tasks from './Tasks'
 
-function AddTask({ Task }) {
+function AddTask() {
   const { register, handleSubmit, setValue } = useForm()
+  const editTaskTitle = useSelector(state => state.auth.editTaskTitle)
+  const editTaskId = useSelector(state => state.auth.taskId)
 
 
   // Pre fill the old task title
   useEffect(() => {
-    if (Task) {
-      setValue("todoTitle", Task.todoTitle)
+    if (editTaskTitle) {
+      setValue("todoTitle", editTaskTitle)
     }
-  }, [Task, setValue])
+  }, [editTaskTitle, setValue])
 
 
   const submit = async (data) => {
-    if (Task) {
-      const id = Task.$id;
-      const session = await storageService.updateTask(id, data)
+    if (editTaskId) {
+      const session = await storageService.updateTask(editTaskId, data);
 
       if (session) {
         console.log("Task Updated");
@@ -35,30 +38,34 @@ function AddTask({ Task }) {
   }
 
   return (
-    <form onSubmit={handleSubmit(submit)}>
-      <div className='w-full'>
-        <Input
-          label="Add task: "
-          placeholder="What do you want to do today..."
-          {...register("todoTitle",
-            {
-              required: "Task title is required!",
-              pattern: {
-                value: /^[A-Za-z0-9]+$/,
-                message: "Only letters and numbers are allowed"
-              }
-            })
-          }
-        />
+    <>
+      <form onSubmit={handleSubmit(submit)}>
+        <div className='w-full'>
+          <Input
+            label="Add task: "
+            placeholder="What do you want to do today..."
+            {...register("todoTitle",
+              {
+                required: "Task title is required!",
+                pattern: {
+                  value: /^[A-Za-z0-9]+$/,
+                  message: "Only letters and numbers are allowed"
+                }
+              })
+            }
+          />
 
-        <Button
-          type='submit'
-          bgColor={Task ? "bg-green-500" : "bg-blue-500"}
-          className="w-full text-center cursor-pointer"
-          children={Task ? "Update" : "Add"}
-        />
-      </div>
-    </form>
+          <Button
+            type='submit'
+            bgColor={editTaskId ? "bg-green-500" : undefined}
+            className="w-full text-center cursor-pointer"
+            children={editTaskId ? "Update" : "Add"}
+          />
+        </div>
+      </form>
+
+      <Tasks />
+    </>
   )
 }
 

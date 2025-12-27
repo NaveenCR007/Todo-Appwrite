@@ -18,7 +18,7 @@ function AuthLayout({ children, authentication = true }) {
     }, [authentication, navigate, authStatus])
 
     return (
-        loading ? <h1>Loading...</h1> : <>{children}</>
+        loading ? <h1>Please Login to add tasks</h1> : <>{children}</>
     )
 }
 

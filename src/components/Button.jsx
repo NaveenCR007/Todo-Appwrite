@@ -1,4 +1,4 @@
-function Button({ children, bgColor = 'bg-blue-400', type = 'button', textColor = 'text-white', className = '', ...props }) {
+function Button({ children, bgColor = 'bg-blue-500', type = 'button', textColor = 'text-white', className = '', ...props }) {
 
     return (
         <div>
